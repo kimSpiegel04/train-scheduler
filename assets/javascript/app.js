@@ -14,37 +14,56 @@ firebase.initializeApp(firebaseConfig);
 // Create a variable to reference the database.
 var database = firebase.database();
 
-//initial values
-var trainName='';
-var destination='';
-var startTime='';
-var frequency='';
+//display current time (military)
+function currentTime(){
+    var getTime = moment().format('HH:mm');
+    $('.current-time').text(getTime);
+};
+
+//animations for min away
 
 $('#submit-info').on('click', function(event){
     event.preventDefault();
-    //grab values
-    trainName=$('#train-name').val().trim();
-    destination=$('#destination').val().trim();
-    startTime=$('#start-time').val().trim();
-    frequency=$('#frequency').val().trim();
 
-    //push
-    database.ref().push({
+    //grab values
+    var trainName=$('#train-name').val().trim();
+    var destination=$('#destination').val().trim();
+    var startTime = $('#start-time').val().trim();
+    var frequency=$('#frequency').val().trim();
+
+    var newTrain={
         name: trainName,
         destination: destination,
         start: startTime,
         frequency: frequency,
-        dateAdded: firebase.database.ServerValue.TIMESTAMP
-    });
+        inputDate: firebase.database.ServerValue.TIMESTAMP
+    }
 
+    //push
+    database.ref().push(newTrain);
 
-    database.ref().on('child_added', function(snapshot){
-        var ss=snapshot.val();
-        console.log(ss.name);
-
-    })
+    //clear input
     document.getElementById('train-name').value='';
     document.getElementById('destination').value='';
     document.getElementById('start-time').value='';
     document.getElementById('frequency').value='';
+});
+
+setInterval(currentTime,1000);
+
+database.ref().on('child_added', function(snapshot){
+    //name and destination (no change required)
+    var train = snapshot.val().name;
+    var destination = snapshot.val().destination;
+    var frequency = snapshot.val().frequency;
+
+    //calculations 
+    var start = moment(snapshot.val().start, 'HH:mm').subtract(1, 'y');
+    var timeDiff = moment().diff(moment(start), "m");
+
+    var remaining = timeDiff % frequency;
+    var minAway = frequency - remaining;
+    var nextArrival = moment().add(minAway, "minutes").format("HH:mm");;
+
+    $(".info-table").append("<tr><td>" + train + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + nextArrival + "</td><td class='min-away'>" + minAway + "</td></tr>");    
 });

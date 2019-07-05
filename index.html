@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Refresh" content="60">
     <title>Train Scheduler</title>
     <script src="https://www.gstatic.com/firebasejs/6.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.3/firebase-database.js"></script>
@@ -10,6 +11,9 @@
     <!-- <link rel="stylesheet" href="assets/style/style.css"> -->
     <link href="https://fonts.googleapis.com/css?family=Roboto|Rubik+Mono+One&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a23a8b73c4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
@@ -21,31 +25,50 @@
             <h1 class='title'>train scheduler</h1>
         </div>
 
-        <form>
-            <div class="form-group">
-                <label for="train-name">Train Name</label>
-                <input type="text" class="form-control" id="train-name">
-            </div>
-            <div class="form-group">
-                <label for="destination">Destination</label>
-                <input type="text" class="form-control" id="destination">
-            </div>
-            <div class="form-group">
-                <label for="start-time">Start Time (00:00)</label>
-                <input type="text" class="form-control" id="start-time">
-            </div>
-            <div class="form-group">
-                <label for="frequency">Frequency (minutes)</label>
-                <input type="text" class="form-control" id="frequency">
-            </div>
-            <button type="submit" class="btn btn-info" id='submit-info'>Submit</button>
-        </form>    
-
-
-
-        <div class="col-12">
-            
+        <div class='row'>
+            <div class='current-time'>00:00</div>
         </div>
+
+        <div class='row'>
+            <div class='col-4'>
+                <form>
+                    <div class="form-group">
+                        <label for="train-name">Train Name</label>
+                        <input type="text" class="form-control" id="train-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <input type="text" class="form-control" id="destination">
+                    </div>
+                    <div class="form-group">
+                        <label for="start-time">Start Time (00:00)</label>
+                        <input class="form-control" id="start-time">
+                    </div>
+                    <div class="form-group">
+                        <label for="frequency">Frequency (minutes)</label>
+                        <input type="text" class="form-control" id="frequency">
+                    </div>
+                    <button type="submit" class="btn btn-info" id='submit-info'>Submit</button>
+                </form>    
+            </div>
+            <div class='col-8'>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Train</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Frequency (m)</th>
+                            <th scope="col">Next Arrival</th>
+                            <th scope="col">Minutes Away</th>
+                        </tr>
+                    </thead>
+                    <tbody class='info-table'>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
 
     </div>
     
