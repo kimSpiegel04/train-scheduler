@@ -1,0 +1,17 @@
+body{
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.blink{
+    color: red;
+    /* content: 'ARR'; */
+    font-weight: bolder;
+}
+
+.card-table{
+    margin-left: 80px;
+}
+
+.table-stuff, .input-class{
+    margin-bottom: 100px;
+}
