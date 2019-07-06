@@ -19,9 +19,17 @@ $(document).ready(function (){
     function currentTime(){
         var getHour = moment().format('HH');
         var getMin = moment().format('mm');
+        var getMonth = moment().format('MMMM');
+        var getDay = moment().format('Do');
+        var getYear = moment().format('YYYY');
+        $('.month').text(getMonth);
+        $('.day').text(getDay);
+        $('.year').text(getYear);
         $('.hours').text(getHour);
         $('.min').text(getMin);
     };
+
+    currentTime();
 
     //animations for min away
     function minChange(k,min){
