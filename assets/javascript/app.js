@@ -73,10 +73,17 @@ $(document).ready(function (){
 
         var remaining = timeDiff % frequency;
         var minAway = frequency - remaining;
-        var nextArrival = moment().add(minAway, "minutes").format("HH:mm");;
+        var nextArrival = moment().add(minAway, "minutes").format("HH:mm");
 
-        $(".info-table").append(`<tr><td>${train}</td><td>${destination}</td><td>${frequency}</td><td>${nextArrival}</td><td class='min-away' id=${key}>${minAway}</td></tr>`);
+        $(".info-table").append(`<tr><td>${train}</td><td>${destination}</td><td>${frequency}</td><td>${nextArrival}</td><td class='min-away' id=${key}>${minAway}</td><td class='delete'><button type="button" class="btn btn-outline-danger btn-xs" data-key=${key}>X</button></td></tr>`);
         
         minChange(key,minAway);
+
+        $('.btn-outline-danger').off('click').on('click',function(){
+            var keyref = $(this).attr('data-key');
+            database.ref().child(keyref).remove();
+            window.location.reload();
+            return false;
+        })
     });
 });

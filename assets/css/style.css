@@ -2,6 +2,26 @@ body{
     font-family: 'Share Tech Mono', monospace;
 }
 
+body {
+    height: 100vh;
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(#fffaf43a),
+        rgba(#68a9d4a4)),
+    url(../images/charles-forerunner-gapYVvUg1M8-unsplash.jpg);
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.jumbotron-fluid {
+    padding-right: 0;
+    padding-left: 0;
+    border-radius: 0;
+    background-color: rgba(240, 248, 255, 0.233);
+}
+
 .blink{
     color: red;
     /* content: 'ARR'; */
@@ -14,4 +34,15 @@ body{
 
 .table-stuff, .input-class{
     margin-bottom: 100px;
+}
+
+.btn-xs{
+    padding: .25rem .4rem;
+    font-size: .875rem;
+    line-height: .5;
+    border-radius: .2rem;
+}
+
+.delete{
+    text-align: center;
 }
